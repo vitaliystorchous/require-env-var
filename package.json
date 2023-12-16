@@ -1,0 +1,40 @@
+{
+  "name": "@vitaliystorchous/require-env-var",
+  "version": "1.0.0",
+  "description": "Simple npm package to require environment variables",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+      "dist"
+  ],
+  "scripts": {
+    "test": "jest --coverage --detectOpenHandles",
+    "build": "tsup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitaliystorchous/require-env-var.git"
+  },
+  "keywords": [
+    "environment",
+    "variable",
+    "require"
+  ],
+  "author": "Vitalii Storchous",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/vitaliystorchous/require-env-var/issues"
+  },
+  "homepage": "https://github.com/vitaliystorchous/require-env-var#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.4",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  }
+}
