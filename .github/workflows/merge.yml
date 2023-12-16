@@ -1,0 +1,16 @@
+name: Merge
+
+on:
+  merge_group:
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+  
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bump Version
+        uses: fadi-quader-mox/pr-version-bump@v1.0.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
