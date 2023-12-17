@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: 'actions/checkout@v4'
         with:
-          ref: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Bump Version
         uses: phips28/gh-action-bump-version@v10.1.1
         env:
