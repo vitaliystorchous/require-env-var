@@ -1,6 +1,6 @@
 {
   "name": "@vitaliystorchous/require-env-var",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Simple npm package to require environment variables",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
