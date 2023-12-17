@@ -3,7 +3,6 @@ name: Test
 on:
   pull_request:
     branches: [ main ]
-  workflow_call:
 
 jobs:
   test:
@@ -11,6 +10,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Check if version bumped
+        uses: del-systems/check-if-version-bumped@v1.3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3

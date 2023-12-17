@@ -3,38 +3,18 @@ name: Publish
 on:
   push:
     branches:
-      # - main
-      - fix/version-bump
+      - main
 
 jobs:
-  test:
-    uses: ./.github/workflows/test.yml
-    secrets: inherit
-  
-  bump-version:
-    needs: test
+  publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: 'actions/checkout@v4'
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Bump Version
-        uses: phips28/gh-action-bump-version@v10.1.1
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm publish --access public
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          skip-tag:  'true'
-
-  # publish:
-  #   needs: bump-version
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 18
-  #         registry-url: 'https://registry.npmjs.org'
-  #     - run: npm ci
-  #     - run: npm publish --access public
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
