@@ -1,0 +1,39 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - ci/publish
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+    secrets: inherit
+  
+  bump-version:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 'actions/checkout@v2'
+        with:
+          ref: ${{ github.ref }}
+      - name: Bump Version
+        uses: phips28/gh-action-bump-version@v10.1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          skip-tag:  'true'
+
+  # publish:
+  #   needs: bump-version
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 18
+  #         registry-url: 'https://registry.npmjs.org'
+  #     - run: npm ci
+  #     - run: npm publish --access public
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
