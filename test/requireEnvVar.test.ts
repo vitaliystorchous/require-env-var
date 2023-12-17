@@ -21,4 +21,25 @@ describe('requireEnvVar', () => {
     const expectedError = new Error(`environment variable is not defined: THIS_ENV_VAR_DOES_NOT_EXIST`)
     expect(getNotExistingEnvVar).toThrow(expectedError)
   })
+
+  test('env var is defined with default value', () => {
+    const envVarName = faker.string.alpha({
+      length: {
+        min: 5,
+        max: 10,
+      },
+      casing: 'upper'
+    })
+    const envVarValue = faker.person.fullName()
+    const defaultEnvVarValue = faker.string.uuid()
+    process.env[envVarName] = envVarValue
+    const value = requireEnvVar(envVarName, { default: defaultEnvVarValue })
+    expect(value).toBe(envVarValue)
+  })
+
+  test('env var is not defined with default value', () => {
+    const defaultEnvVarValue = faker.string.uuid()
+    const value = requireEnvVar('THIS_ENV_VAR_DOES_NOT_EXIST', { default: defaultEnvVarValue })
+    expect(value).toBe(defaultEnvVarValue)
+  })
 })
